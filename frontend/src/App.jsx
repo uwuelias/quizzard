@@ -1,12 +1,22 @@
-import { Button } from "@/components/ui/button";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import SignInPage from "./pages/SignInPage";
+import Footer from "./components/Footer";
+import { ThemeProvider } from "@/components/theme-provider";
 
 function App() {
   return (
-    <>
-      <div className="flex min-h-svh flex-col items-center justify-center">
-        <Button variant="outline">Click me</Button>
-      </div>{" "}
-    </>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="min-h-screen text-primary overscroll-contain">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signin" element={<SignInPage />} />
+        </Routes>
+      </div>
+      <Footer />
+    </ThemeProvider>
   );
 }
 
