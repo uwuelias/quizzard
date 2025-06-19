@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import SignInPage from "./pages/SignInPage";
+import AuthenticationPage from "./pages/AuthenticationPage";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -12,7 +12,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/authentication" element={<AuthenticationPage />} />
         </Routes>
       </div>
       <Footer />

@@ -14,7 +14,7 @@ const HomePage = () => {
         </p>
         <div className="flex justify-center gap-3 flex-wrap">
           <Button asChild>
-            <Link to="/signin">Sign in</Link>
+            <Link to="/authentication">Sign in</Link>
           </Button>
           <Button asChild>
             <a href="https://github.com/uwuelias/quizzard" target="_blank">
