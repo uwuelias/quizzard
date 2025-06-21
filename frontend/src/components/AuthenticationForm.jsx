@@ -1,93 +1,104 @@
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const AuthenticationForm = () => {
   const [signIn, setSignIn] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmpassword: "",
+    confirmedPassword: "",
   });
-  const toggleMode = () => {
-    setFormData({ email: "", password: "", confirmPassword: "" });
-    setSignIn(!signIn);
-  };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+  const toggleMode = () => {
+    setSignIn(!signIn);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!signIn && formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+    if (signIn) {
+      // set up sign in logic
+    } else {
+      if (
+        !formData.email.trim() ||
+        !formData.password.trim() ||
+        !formData.confirmedPassword.trim()
+      ) {
+        toast("Please fill all fields", {
+          action: {
+            label: "Clear",
+          },
+        });
+        return;
+      } else if (formData.password != formData.confirmedPassword) {
+      }
     }
-
-    console.log("Submitted:", formData);
   };
 
   return (
     <div className="w-full max-w-md rounded-lg bg-card p-8 shadow-lg">
       <h2 className="mb-6 text-center text-2xl font-semibold">
-        {signIn ? "Sign in" : "Sign up"}
+        {signIn ? "Sign in" : "Create account"}
       </h2>
-      <form className="space-y-6" autoComplete="off">
-        <div className="flex flex-col gap-2 justify-center">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email"></Input>
+      <form className="space-y-6">
+        <div>
+          <label
+            htmlFor="email"
+            className="mb-1 block text-sm font-medium text-foreground"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            className="w-full px-4 py-2 border border-input bg-background text-foreground"
+          />
         </div>
-        <div className="flex flex-col gap-2 justify-center">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password"></Input>
+        <div>
+          <label
+            htmlFor="password"
+            className="mb-1 block text-sm font-medium text-foreground"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            className="w-full px-4 py-2 border border-input bg-background text-foreground"
+          />
         </div>
         {!signIn && (
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input
-              id="confirmPassword"
+          <div>
+            <label
+              htmlFor="confirmPassword"
+              className="mb-1 block text-sm font-medium text-foreground"
+            >
+              Confirm Password
+            </label>
+            <input
               type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
+              id="confirmPassword"
+              name="confirmPassword"
               required
+              className="w-full px-4 py-2 border border-input bg-background text-foreground"
             />
           </div>
         )}
-        <div className="text-sm text-center text-muted-foreground">
-          {signIn ? (
-            <>
-              Don&apos;t have an account?{" "}
-              <button
-                type="button"
-                onClick={toggleMode}
-                className="text-primary hover:underline"
-              >
-                Sign up
-              </button>
-            </>
-          ) : (
-            <>
-              Already have an account?{" "}
-              <button
-                type="button"
-                onClick={toggleMode}
-                className="text-primary hover:underline"
-              >
-                Sign in
-              </button>
-            </>
-          )}
-        </div>
-        <Button
-          type="submit"
-          className="w-full hover:cursor-pointer"
-          onClick={handleSubmit}
-        >
-          {signIn ? "Sign in" : "Sign up"}
+        <p className="text-center italic text-muted-foreground">
+          <span className="">
+            {signIn ? "Don't have an account?" : "Already have an account?"}
+          </span>{" "}
+          <button className="text-primary hover:underline" onClick={toggleMode}>
+            {signIn ? "Sign up" : "Sign in"}
+          </button>
+        </p>
+        <Button type="submit" className="w-full" onClick={handleSubmit}>
+          Submit
         </Button>
       </form>
     </div>
