@@ -5,6 +5,8 @@ import { connectDB } from "./config/db.js";
 import Flashcard from "./models/flashcard.model.js";
 import mongoose from "mongoose";
 import flashcardRoutes from "./routes/flashcard.route.js";
+import authRoutes from "./routes/auth.route.js";
+import cors from "cors";
 
 dotenv.config(); // reads .env file and parses all the key-value pairs
 
@@ -14,8 +16,10 @@ const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
 
 app.use(express.json()); // allow us to accept json data in the req.body
+app.use(cors());
 
-app.use("/flashcards", flashcardRoutes); // // attach flashcard-related routes (GET, POST, PUT, DELETE) under '/flashcards'
+app.use("/api/flashcards", flashcardRoutes); // attach flashcard-related routes (GET, POST, PUT, DELETE) under '/flashcards'
+app.use("/api/auth", authRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));

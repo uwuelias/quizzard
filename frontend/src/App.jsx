@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import AuthenticationPage from "./pages/AuthenticationPage";
+import DashboardPage from "./pages/DashboardPage";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/authentication" element={<AuthenticationPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
       </div>
       <Footer />
